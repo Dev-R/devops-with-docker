@@ -1,0 +1,40 @@
+frontend:
+    image: example-frontend
+
+  backend:
+    image: example-backend
+    restart: unless-stopped
+    environment:
+     REDIS_HOST: "redis-cache"
+     POSTGRES_HOST: database
+     POSTGRES_USER: admin
+     POSTGRES_PASSWORD: admin
+     POSTGRES_DATABASE: postgres
+    depends_on:
+     - database
+
+  redis-cache:
+    image: redis
+
+  database:
+    image: postgres
+    environment:
+     POSTGRES_PASSWORD: admin
+     POSTGRES_USER: admin
+     POSTGRES_DB: postgres
+    volumes:
+     - type: bind
+       source: ./database
+       target: /var/lib/postgresql/data
+
+  proxy:
+    image: nginx
+    volumes:
+     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+     - "8000:80"
+    environment:
+     - NGINX_PORT=80
+    depends_on:
+     - frontend
+     - backend

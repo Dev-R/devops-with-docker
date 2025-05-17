@@ -1,0 +1,8 @@
+# What is the size of the alpine image (in MB):
+Answer
+15.7MB
+
+# What is the size of the ubuntu image (in MB):
+Answer
+83MB
+

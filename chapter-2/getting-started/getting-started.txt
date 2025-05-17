@@ -1,0 +1,3 @@
+0a1b88c7014d   apachebench   "ab -n 1000000 -c 10…"   32 seconds ago   Up 31 seconds                       elegant_ramanujan
+c5babe81b86f   redis         "docker-entrypoint.s…"   37 seconds ago   Exited (0) 1 second ago             agitated_feynman
+caeaa8427156   nginx         "/docker-entrypoint.…"   40 seconds ago   Exited (0) 1 second ago             blissful_tesla
