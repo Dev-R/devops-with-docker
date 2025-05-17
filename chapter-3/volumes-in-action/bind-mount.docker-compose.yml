@@ -1,0 +1,31 @@
+services:
+  frontend:
+    image: example-frontend
+    ports:
+      - "127.0.0.1:5000:5000"
+  backend:
+    image: example-backend
+    restart: unless-stopped
+    ports:
+     - "127.0.0.1:8080:8080"
+    environment:
+     REDIS_HOST: "redis-cache"
+     POSTGRES_HOST: database
+     POSTGRES_USER: admin
+     POSTGRES_PASSWORD: admin
+     POSTGRES_DATABASE: postgres
+    depends_on:
+     - database
+  redis-cache:
+    image: redis
+
+  database:
+    image: postgres
+    environment:
+     POSTGRES_PASSWORD: admin
+     POSTGRES_USER: admin
+     POSTGRES_DB: postgres
+    volumes:
+     - type: bind
+       source: ./database
+       target: /var/lib/postgresql/data
